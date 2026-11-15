@@ -1,0 +1,11 @@
+﻿{
+  "name": "ARES-MED Autonomous Deep-Space Medical Decision System",
+  "short_name": "ARES-MED",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050811",
+  "theme_color": "#38bdf8",
+  "description": "Offline-first autonomous astronaut health monitoring & triage system by Team VitalsZero for NASA Space Apps 2026."
+}
+
+

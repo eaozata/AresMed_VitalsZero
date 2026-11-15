@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalsZero | ARES-MED Autonomous Space Health Platform</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- 2-TONE STICKY HEADER: 1-ROW TELEMETRY + CENTERED LIGHTER NAV BAR BELOW -->
+  <div class="sticky-site-header">
+    <header class="mission-header">
+      <div class="header-left">
+        <div class="brand-block" id="brandHomeBtn" title="Return to VitalsZero Home">
+          <img src="vitalszero_logo.jpg" alt="VitalsZero Logo" class="brand-logo-img" />
+          <div class="brand-title">
+            <h1>
+              VITALSZERO
+              <span class="badge-team">ARES-MED &bull; NASA Space Apps 2026</span>
+            </h1>
+            <div class="brand-subtitle" data-i18n="header_sub">
+              Autonomous Real-Time Evaluation &amp; Space Medical Decision System
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-controls-right">
+        <div class="lang-switch" role="group" aria-label="Language Toggle">
+          <button class="lang-btn active" id="langBtnEN" data-lang="en">EN</button>
+          <button class="lang-btn" id="langBtnTR" data-lang="tr">TR</button>
+        </div>
+
+        <div class="telemetry-pill">
+          <span class="label" data-i18n="lbl_regime">Mission Regime</span>
+          <select id="envModeSelect" class="env-preset-select" aria-label="Select Mission Environment Mode">
+            <option value="transit_0g">Deep-Space Transit (0.00g)</option>
+            <option value="station_leo">Orbital Station LEO (0.00g)</option>
+            <option value="lunar_base">Lunar Surface Base (0.16g)</option>
+            <option value="mars_surface">Mars Surface Habitat (0.38g)</option>
+            <option value="planetary_rover">Pressurized Rover / EVA (0.16–0.38g)</option>
+          </select>
+        </div>
+
+        <div class="telemetry-pill">
+          <span class="label" data-i18n="lbl_day">Mission Day</span>
+          <span class="value" id="headerMed">MED DAY 142</span>
+          <input type="range" id="headerMedSlider" class="header-day-slider" min="1" max="500" value="142"
+            aria-label="Adjust Mission Day" />
+        </div>
+
+        <div class="telemetry-pill">
+          <span class="label" data-i18n="lbl_delay">Earth Comm Delay</span>
+          <span class="value">
+            <span class="pulse-dot"></span>
+            <span id="headerDelay">13.9 MIN OWLT (RT: 27.8m)</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="sub-nav-bar" aria-label="Primary Page Navigation">
+      <button class="top-nav-btn active" data-jump="page-home" data-i18n="nav_home">Home</button>
+      <button class="top-nav-btn" data-jump="page-about" data-i18n="nav_about">About Us</button>
+      <button class="top-nav-btn" data-jump="page-scenarios" data-i18n="nav_scenarios">Mission &amp;
+        Scenarios</button>
+      <button class="top-nav-btn" data-jump="page-interactive" data-i18n="nav_interactive">Interactive Lab</button>
+      <button class="top-nav-btn" data-jump="page-diagnosis" data-i18n="nav_diagnosis">Self-Diagnosis &amp;
+        Care</button>
+      <button class="top-nav-btn" data-jump="page-references" data-i18n="nav_refs">References &amp; Data
+        Lineage</button>
+      <button class="top-nav-btn" data-jump="page-faq" data-i18n="nav_faq">FAQ &amp; Contact</button>
+    </nav>
+  </div>
+
+  <main class="main-container">
+
+    <!-- ================================================================= -->
+    <!-- PAGE 0: HOME (COMBINED HERO + DIFFERENCE/FAQ ABOVE + 3 CARDS BELOW) -->
+    <!-- ================================================================= -->
+    <section id="page-home" class="page-section active">
+      <div class="home-space-hero" style="background-image:url('mission_hero.png'); margin-bottom:24px;">
+        <div class="home-space-hero-inner home-hero-split" style="max-width:none;">
+          <div class="home-hero-combined-box">
+            <span class="did-you-know-pill" data-i18n="dyk_badge" style="width:fit-content;">DID YOU KNOW? &bull; NASA
+              SPACE APPS 2026</span>
+            <h1 data-i18n="hero_title" style="font-size:32px; margin-bottom:6px;">Did you know astronauts wait up to
+              <span>44 minutes</span> just to send a message to Earth and get a reply?</h1>
+            <p data-i18n="prob_desc" style="font-size:14.5px; color:#e2e8f0; line-height:1.55; margin:0;">
+              During Mars expeditions, radio signals take up to 22 minutes each way (44 minutes round-trip). Standard
+              Earth medical software fails in 0g because fluids shift to the head and cabin CO<sub>2</sub> mimics common
+              illnesses.
+            </p>
+            <div class="home-hero-subblock" style="border-left-color:#38bdf8; margin-top:4px;">
+              <strong data-i18n="sol_title" style="color:#7dd3fc;">As Team VitalsZero, we are solving this delay problem
+                by:</strong>
+              <span data-i18n="sol_desc">Fusing astronaut vitals with spacecraft air &amp; radiation telemetry 100%
+                offline, adapting baselines to each crew member's 0g physiology, and generating instant step-by-step
+                prescriptions and HL7 FHIR packets without waiting for Earth.</span>
+            </div>
+          </div>
+
+          <div class="home-hero-cta-stack">
+            <button class="btn-primary" data-jump="page-scenarios" data-i18n="cta_scenarios">Launch Mission &amp;
+              Scenarios &rarr;</button>
+            <button class="btn-primary" data-jump="page-interactive" data-i18n="cta_interactive">Open Interactive Lab
+              &rarr;</button>
+            <button class="btn-primary" data-jump="page-diagnosis" data-i18n="cta_diagnosis">Self-Diagnosis &amp; Rx
+              &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT WE SOLVE + USER-GUIDE FAQ (ABOVE THE 3 FEATURE CARDS) -->
+      <div class="grid-2" style="margin-bottom:24px;">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title" data-i18n="home_diff_title">What Makes VitalsZero Different?</span>
+            <span class="card-badge" data-i18n="home_diff_badge">Core Innovation</span>
+          </div>
+          <ul style="padding-left:18px; color:var(--text-body); display:flex; flex-direction:column; gap:10px;">
+            <li data-i18n="home_diff_1"><strong>Body + Spacecraft Fusion:</strong> Links crew vitals directly to cabin
+              CO<sub>2</sub> and radiation sensors so crews fix an air fan instead of taking the wrong medication.</li>
+            <li data-i18n="home_diff_2"><strong>0g &amp; Sex-Adapted Baselines:</strong> Calibrates normal ranges for
+              microgravity fluid shifts and female/male physiology.</li>
+            <li data-i18n="home_diff_3"><strong>For Everyone, Not Just Astronauts:</strong> Built for real astronauts,
+              flight surgeons, students, rural clinics, and anyone curious about space health.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title" data-i18n="home_faq_title">Quick User Guide (FAQ)</span>
+            <span class="card-badge" data-i18n="home_faq_badge">How to Use This Site</span>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary data-i18n="faq1_q">How do I navigate the platform?</summary>
+              <p data-i18n="faq1_a">Use the top navigation bar or the <strong>&#9776; Menu</strong> button anytime to
+                jump between Home, About Us, Mission &amp; Scenarios, Interactive Lab, Self-Diagnosis, and References.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq2_q">How does the 30-Day Treatment Quiz work?</summary>
+              <p data-i18n="faq2_a">Inside <strong>Interactive Lab &rarr; 30-Day Treatment Quiz</strong>, choose any
+                space scenario and answer sequential one-choice questions. The graph plots your personal decision curve
+                alongside untreated and optimal curves.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq3_q">Can I ask questions about any section?</summary>
+              <p data-i18n="faq3_a">Yes! Click the <strong>VitalsZero AI Assistant</strong> button in the bottom-right
+                corner anytime for instant explanations in English or Turkish.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1080P WALKTHROUGH VIDEO (ABOVE THE 3 FEATURE CARDS) -->
+      <div class="card" style="margin-bottom:24px;">
+        <div class="card-header">
+          <span class="card-title" data-i18n="home_video_title">ARES-MED 1080p System Showcase</span>
+          <span class="card-badge">1080p HD Video</span>
+        </div>
+        <div class="walkthrough-box" style="max-width:920px; margin:0 auto;">
+          <video id="homeGuideVideo" src="ares_med_guide.mp4" controls playsinline preload="metadata" poster="mission_hero.png" style="width:100%; max-height:480px; display:block; background:#071326; border-radius:12px;">
+            Your browser does not support HTML5 video playback.
+          </video>
+        </div>
+      </div>
+
+      <!-- VISUAL FEATURE CARDS (BELOW VIDEO) -->
+      <div class="three-feature-grid">
+        <div class="feature-nav-card" data-jump="page-scenarios">
+          <div class="feature-card-visual">
+            <img src="card_mission.jpg" alt="Mission and Scenarios" />
+            <span data-i18n="card1_tag">01 &bull; MISSION &amp; SCENARIOS</span>
+          </div>
+          <div class="feature-card-body">
+            <div>
+              <h3 data-i18n="card1_title">Explore Crew &amp; 5 Space Crises</h3>
+              <p data-i18n="card1_desc">Pick an astronaut avatar, choose a deep-space scenario, and see how every organ
+                reacts on the anatomical map.</p>
+            </div>
+            <span class="feature-link" data-i18n="card1_link">Open Scenarios &rarr;</span>
+          </div>
+        </div>
+
+        <div class="feature-nav-card" data-jump="page-interactive">
+          <div class="feature-card-visual">
+            <img src="card_lab.jpg" alt="Interactive Diagnostics" />
+            <span data-i18n="card2_tag">02 &bull; INTERACTIVE LAB (3 TOOLS)</span>
+          </div>
+          <div class="feature-card-body">
+            <div>
+              <h3 data-i18n="card2_title">Test Yourself as an Astronaut</h3>
+              <p data-i18n="card2_desc">Run webcam pulse &amp; voice scans, test your EVA reaction speed, and plot your
+                30-day treatment trajectory.</p>
+            </div>
+            <span class="feature-link" data-i18n="card2_link">Open Interactive Lab &rarr;</span>
+          </div>
+        </div>
+
+        <div class="feature-nav-card" data-jump="page-diagnosis">
+          <div class="feature-card-visual">
+            <img src="card_rx.jpg" alt="Self Diagnosis and Prescription" />
+            <span data-i18n="card3_tag">03 &bull; SELF-DIAGNOSIS &amp; RX</span>
+          </div>
+          <div class="feature-card-body">
+            <div>
+              <h3 data-i18n="card3_title">Custom Symptom &amp; Time Plan</h3>
+              <p data-i18n="card3_desc">Enter your mission location, days in space, and symptoms to receive a tailored
+                medical prescription &amp; PDF.</p>
+            </div>
+            <span class="feature-link" data-i18n="card3_link">Start Diagnosis &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card"
+        style="margin-top:20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
+        <div>
+          <strong style="font-size:15px;" data-i18n="contact_title">Contact Team VitalsZero</strong>
+          <p style="font-size:13px; color:var(--text-muted);" data-i18n="contact_sub">Elif Azra &Ouml;zata &amp; Ali
+            Manas Aydo&#287;mu&#351; &bull; NASA Space Apps Challenge 2026</p>
+        </div>
+        <a href="mailto:vitalszero0@gmail.com" class="btn-primary"
+          style="text-decoration:none;">vitalszero0@gmail.com</a>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 1: ABOUT US (SPACE BACKDROP + 2-COL SPLIT + 2x2 SWOT SQUARE) -->
+    <!-- ================================================================= -->
+    <section id="page-about" class="page-section">
+      <!-- TOP: SPACE BACKDROP + CIRCULAR LOGO + STORY -->
+      <div class="about-hero-backdrop">
+        <img src="space_backdrop.png" alt="Earth atmosphere from orbit against deep space" class="backdrop-img" />
+        <div class="about-hero-overlay">
+          <img src="vitalszero_logo.jpg" alt="VitalsZero Circular Logo" class="about-logo-badge" />
+          <span class="hero-eyebrow"
+            style="background:rgba(255,255,255,0.16); color:#ffffff; border-color:rgba(255,255,255,0.35);">ABOUT
+            VITALSZERO &bull; ARES-MED</span>
+          <h2 data-i18n="about_hero_title">Our Story &amp; ARES-MED (Autonomous Real-Time Evaluation &amp; Space Medical
+            Decision System)</h2>
+          <p data-i18n="about_p1">
+            <strong>ARES-MED</strong> (<em>Autonomous Real-Time Evaluation &amp; Space Medical Decision System</em>) was
+            founded by <strong>Elif Azra &Ouml;zata</strong> and <strong>Ali Manas Aydo&#287;mu&#351;</strong>, two
+            young researchers passionate about biology, human health, space exploration, and technology. Looking toward
+            upcoming Artemis lunar habitats and Mars expeditions, we asked: <em>what happens when an astronaut faces a
+              medical crisis while radio signals to Earth take up to 44 minutes round-trip?</em>
+          </p>
+          <p data-i18n="about_p2">
+            Our <strong>purpose and mission</strong> is to deliver an earth-independent, offline-capable medical copilot
+            for <strong>astronaut crews, Crew Medical Officers, and mission planners</strong>&mdash;and simultaneously
+            provide a zero-internet triage tool for remote clinics and disaster zones on Earth.
+          </p>
+        </div>
+      </div>
+
+      <!-- MIDDLE: 2-COLUMN SPLIT (LEFT: UPDATED SCIENCE | RIGHT: 2x2 SWOT SQUARE) -->
+      <div class="about-split-panel">
+        <div class="about-split-col">
+          <h3 data-i18n="about_left_title">The Science Behind ARES-MED</h3>
+          <p data-i18n="sci_p1">
+            <strong>01. 44-Min Blackout &amp; 0g Calibration:</strong> In zero gravity, ~2 L of fluid shifts headward
+            (SANS, ONSD &gt; 5.8 mm). ARES-MED dynamically adapts baselines by Mission Day (1&ndash;500), gravity
+            (0g/0.16g/0.38g), and sex.
+          </p>
+          <p data-i18n="sci_p2">
+            <strong>02. Spacecraft Coupling:</strong> Links crew vitals directly to cabin ppCO<sub>2</sub>,
+            NASA-STD-3001 radiation limits (600 mSv), and ~1.25%/month bone loss.
+          </p>
+          <p data-i18n="sci_p3">
+            <strong>03. Interactive Checks &amp; Rx PDF:</strong> Combines 4 crew profiles &times; 5 crises, webcam rPPG
+            &amp; voice stress, NASA PVT EVA testing, a 30-day quiz, and 1-page Prescription PDF + HL7 FHIR export.
+          </p>
+          <p style="margin-bottom:0;" data-i18n="sci_adv">
+            <strong>Our Advantage:</strong> Built for both astronauts and everyone on Earth—100% offline, grounded in
+            NASA OSDR, Twins Study &amp; TRISH HERMES.
+          </p>
+        </div>
+
+        <div class="about-split-col">
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+            <h3 style="margin:0;" data-i18n="swot_title">ARES-MED Project SWOT Analysis</h3>
+            <span class="card-badge">STRATEGIC EVALUATION</span>
+          </div>
+          <div class="swot-square-grid" style="margin-top:0;">
+            <div class="swot-quad swot-s" style="padding:14px;">
+              <h4 data-i18n="swot_s_t">S &bull; Strengths</h4>
+              <ul>
+                <li data-i18n="swot_s_1">100% offline-first edge execution for 44-minute Mars communication blackouts.
+                </li>
+                <li data-i18n="swot_s_2">Designed for everyone—not only astronauts, but also students, space
+                  enthusiasts, and remote clinics.</li>
+                <li data-i18n="swot_s_3">Grounded in official NASA OSDR, Twins Study, and NASA-STD-3001 benchmarks.</li>
+                <li data-i18n="swot_s_4"><strong>If-Clause Potential:</strong> If paired with live ISS flight hardware,
+                  controlled cabin lighting, and clinical certification, it becomes a flight-ready medical copilot.</li>
+              </ul>
+            </div>
+            <div class="swot-quad swot-w" style="padding:14px;">
+              <h4 data-i18n="swot_w_t">W &bull; Weaknesses</h4>
+              <ul>
+                <li data-i18n="swot_w_1">Prototype currently uses simulated telemetry rather than live ISS flight
+                  hardware.</li>
+                <li data-i18n="swot_w_2">Webcam rPPG pulse accuracy depends on cabin lighting conditions.</li>
+                <li data-i18n="swot_w_3">Requires formal clinical certification before replacing flight-certified
+                  medical kits.</li>
+              </ul>
+            </div>
+            <div class="swot-quad swot-o" style="padding:14px;">
+              <h4 data-i18n="swot_o_t">O &bull; Opportunities</h4>
+              <ul>
+                <li data-i18n="swot_o_1">Direct dual-use deployment in rural Earth clinics, submarines, and commercial
+                  space stations (Artemis Gateway).</li>
+                <li data-i18n="swot_o_2">Turning regulatory rigor into trust: early agency partnerships transform strict
+                  aerospace rules into a globally certified standard.</li>
+                <li data-i18n="swot_o_3">Human-in-the-loop empowerment: transparent HL7 FHIR &amp; TRISH HERMES outputs
+                  support Crew Medical Officers without replacing human judgment.</li>
+              </ul>
+            </div>
+            <div class="swot-quad swot-t" style="padding:14px;">
+              <h4 data-i18n="swot_t_t">T &bull; Threats</h4>
+              <ul>
+                <li data-i18n="swot_t_1">Strict aerospace medical regulatory approval timelines.</li>
+                <li data-i18n="swot_t_3">Crew over-reliance on automated triage without human medical judgment.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL-WIDTH ABOUT US STORY & SCIENCE VIDEO -->
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <span class="card-title" data-i18n="video_card_title">ARES-MED Story &amp; Science Behind Us</span>
+          <span class="card-badge">1080p HD Video</span>
+        </div>
+        <div class="walkthrough-box" id="walkthroughBox" style="max-width:860px; margin:0 auto;">
+          <video id="aboutGuideVideo" src="ares_med_about.mp4" controls playsinline preload="metadata"
+            poster="space_backdrop.png"
+            style="width:100%; max-height:480px; display:block; background:#071326; border-radius:12px;">
+            Your browser does not support HTML5 video playback.
+          </video>
+          <div class="walkthrough-controls" style="justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <span style="font-size:12px; color:#cbd5e1;" data-i18n="about_video_caption">VitalsZero | ARES-MED &mdash; 0g Physiology, Cabin Sensor Fusion &amp; Dual-Use Impact</span>
+            <a href="ares_med_about.mp4" download="ARES_MED_About_1080p.mp4" class="wt-btn secondary"
+              style="text-decoration:none;">&#11015; MP4 (1080p)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card"
+        style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <span><strong>Founders:</strong> Elif Azra &Ouml;zata &amp; Ali Manas Aydo&#287;mu&#351; &bull;
+          <strong>Contact:</strong> <a href="mailto:vitalszero0@gmail.com"
+            style="color:var(--blue-primary); font-weight:600;">vitalszero0@gmail.com</a></span>
+        <button class="btn-primary" data-jump="page-scenarios" data-i18n="cta_scenarios">Launch Mission &amp; Scenarios
+          &rarr;</button>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 2: MISSION & SCENARIOS (3-STEP WIZARD: AVATAR -> SCEN -> FX) -->
+    <!-- ================================================================= -->
+    <section id="page-scenarios" class="page-section">
+      <div class="mission-banner">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <h2 style="font-size:21px;" data-i18n="scen_banner_title">Mission Briefing: Operation Ares-IV (Mars Transit)
+          </h2>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-secondary" id="guidedDemoBtn">&#9654; Auto-Play Tour</button>
+            <button class="btn-secondary" id="resetNominalBtn">&#8634; Reset</button>
+          </div>
+        </div>
+        <p style="font-size:14px; margin-bottom:10px;" data-i18n="scen_banner_desc">
+          Our four-person crew is 142 days into a deep-space transit toward Mars. Follow the 3 steps below: first choose
+          your astronaut avatar, then pick a space crisis, and finally inspect the live body effects &amp; action plan.
+        </p>
+        <div style="font-family:var(--font-mono); font-size:11.5px; color:var(--blue-primary);" id="envEmphasisText">
+          Focus: Fluid shift (SANS), radiation storm readiness, closed-loop CO2.
+        </div>
+      </div>
+
+      <!-- WIZARD PROGRESS PILLS -->
+      <div class="wizard-progress">
+        <span class="wiz-pill active" id="wizPill1" data-i18n="wiz_s1">Step 1: Choose Character</span>
+        <span class="wiz-pill" id="wizPill2" data-i18n="wiz_s2">Step 2: Pick Scenario</span>
+        <span class="wiz-pill" id="wizPill3" data-i18n="wiz_s3">Step 3: The Effects &amp; Plan</span>
+      </div>
+
+      <!-- STEP 1: CHOOSE YOUR CHARACTER (4 ASTRONAUT AVATARS) -->
+      <div id="scenStep1" class="wizard-step active">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title" data-i18n="step1_crew">Step 1: Choose Your Astronaut Character</span>
+            <span class="card-badge" data-i18n="step1_crew_sub">Select 1 of 4 Crew Avatars to Continue</span>
+          </div>
+          <div class="crew-avatar-grid" id="crewList"></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: SCENARIO PICKING (5 VERTICAL COLUMNS WITH SPACE VISUALS) -->
+      <div id="scenStep2" class="wizard-step">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title" data-i18n="step2_scen">Step 2: Scenario Picking (Click a Column)</span>
+            <button class="btn-secondary" id="backToStep1Btn" style="padding:5px 12px; font-size:12px;"
+              data-i18n="btn_back_char">&larr; Change Character</button>
+          </div>
+
+          <div class="scenario-columns-grid">
+            <button class="scen-col-card active" data-scenario="nominal">
+              <div class="scen-col-visual" style="position:relative; overflow:hidden;">
+                <img src="mission_hero.png" alt="Nominal Mars Transit"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <span
+                  style="position:absolute; top:8px; left:8px; background:rgba(12,35,64,0.82); color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px;">01
+                  &bull; 0.00g</span>
+              </div>
+              <div class="scen-col-body">
+                <h4 data-i18n="sc1_t">Nominal Mars Transit</h4>
+                <p data-i18n="sc1_d">Cruising quietly at 0.00g, the crew settles into microgravity adaptation. Heart
+                  rate stabilizes slightly lower, fluids shift gently upward, and daily ARED workouts keep bone and
+                  muscle loss under control.</p>
+                <div class="scen-col-detail" data-i18n="sc1_det">Vitals: Nominal &bull; Cabin CO2: 1.9 mmHg &bull;
+                  Focus: Baseline 0g calibration</div>
+              </div>
+            </button>
+
+            <button class="scen-col-card" data-scenario="co2_fault">
+              <div class="scen-col-visual" style="position:relative; overflow:hidden;">
+                <img src="inter_camera_real.png" alt="CO2 Scrubber Fault"
+                  style="width:100%; height:100%; object-fit:cover; filter:sepia(0.35) saturate(1.4);" />
+                <span
+                  style="position:absolute; top:8px; left:8px; background:rgba(120,53,15,0.88); color:#fde68a; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px;">02
+                  &bull; AIR SYSTEM</span>
+              </div>
+              <div class="scen-col-body">
+                <h4 data-i18n="sc2_t">CO2 Scrubber Fault</h4>
+                <p data-i18n="sc2_d">A clogged amine bed traps exhaled CO2 inside the sleeping module (4.9 mmHg).
+                  Without ventilation, cerebral blood vessels dilate—causing morning headaches, sluggish PVT reflexes,
+                  and shallow breathing.</p>
+                <div class="scen-col-detail" data-i18n="sc2_det">Hazard: Hypercapnia &bull; Fix: Portable scrubber fan +
+                  O2 check</div>
+              </div>
+            </button>
+
+            <button class="scen-col-card" data-scenario="solar_storm">
+              <div class="scen-col-visual" style="position:relative; overflow:hidden;">
+                <img src="inter_eva_real.png" alt="Solar Particle Storm"
+                  style="width:100%; height:100%; object-fit:cover; filter:hue-rotate(-28deg) saturate(1.5);" />
+                <span
+                  style="position:absolute; top:8px; left:8px; background:rgba(127,29,29,0.88); color:#fecaca; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px;">03
+                  &bull; RADIATION</span>
+              </div>
+              <div class="scen-col-body">
+                <h4 data-i18n="sc3_t">Solar Particle Storm</h4>
+                <p data-i18n="sc3_d">An X-class solar flare floods deep space with high-energy protons (14.8 mSv/day).
+                  The crew must retreat behind water-wall shielding immediately to protect bone marrow, DNA, and ocular
+                  retinas.</p>
+                <div class="scen-col-detail" data-i18n="sc3_det">Hazard: Acute Dose Spike &bull; Fix: Storm shelter +
+                  dosimeter log</div>
+              </div>
+            </button>
+
+            <button class="scen-col-card" data-scenario="sans_decond">
+              <div class="scen-col-visual" style="position:relative; overflow:hidden;">
+                <img src="inter_quiz_real.png" alt="Eye and Bone Shift"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <span
+                  style="position:absolute; top:8px; left:8px; background:rgba(12,35,64,0.85); color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px;">04
+                  &bull; SANS / BONE</span>
+              </div>
+              <div class="scen-col-body">
+                <h4 data-i18n="sc4_t">Eye &amp; Bone Shift</h4>
+                <p data-i18n="sc4_d">By Day 215 of weightlessness, persistent cephalad fluid pressure flattens the back
+                  of the eye (SANS) while unloaded femurs shed calcium. Ultrasound ONSD checks and lower-body negative
+                  pressure are critical.</p>
+                <div class="scen-col-detail" data-i18n="sc4_det">Hazard: Optic Edema &amp; BMD Loss &bull; Fix: Chibis
+                  LBNP + ARED</div>
+              </div>
+            </button>
+
+            <button class="scen-col-card" data-scenario="isolation_fatigue">
+              <div class="scen-col-visual" style="position:relative; overflow:hidden;">
+                <img src="space_backdrop.png" alt="Sleep and Fatigue"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <span
+                  style="position:absolute; top:8px; left:8px; background:rgba(49,46,129,0.88); color:#ddd6fe; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px;">05
+                  &bull; SLEEP DEBT</span>
+              </div>
+              <div class="scen-col-body">
+                <h4 data-i18n="sc5_t">Sleep &amp; Fatigue</h4>
+                <p data-i18n="sc5_d">Sixteen orbital sunrises a day and constant fan hum leave the crew with a 4.8-hour
+                  sleep debt. Cortisol rises, HRV drops, and reaction times slow—making EVA mistakes far more likely.
+                </p>
+                <div class="scen-col-detail" data-i18n="sc5_det">Hazard: Circadian Drift &bull; Fix: Blue-light shift +
+                  PVT hold</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: THE EFFECTS (BODY MAP + VITALS + CLEAR ACTION PLAN) -->
+      <div id="scenStep3" class="wizard-step">
+        <div class="card"
+          style="margin-bottom:16px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <strong id="scenarioStoryTitle" style="color:var(--blue-primary); display:block;">Scenario 01: Nominal Mars
+              Transit</strong>
+            <p id="scenarioStoryText" style="font-size:13px; color:var(--text-body); margin:0;">
+              Even when spacecraft systems are completely healthy, zero gravity quietly shifts ~2 liters of blood toward
+              the upper body.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-secondary" id="backToStep2Btn" style="padding:6px 12px; font-size:12px;"
+              data-i18n="btn_back_scen">&larr; Change Scenario</button>
+            <button class="btn-secondary" id="backToStep1From3Btn" style="padding:6px 12px; font-size:12px;"
+              data-i18n="btn_back_char">&larr; Change Character</button>
+          </div>
+        </div>
+
+        <!-- WIDE SPACIOUS HUMAN BODY MAP WITH LATERAL CALLOUTS -->
+        <div class="card" style="margin-bottom:22px;">
+          <div class="card-header">
+            <span class="card-title" data-i18n="step3_body">Step 3: The Effects on the Human Body</span>
+            <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+              <button class="gender-btn active" id="genderBtnF" data-sex="F">&#9792; Female</button>
+              <button class="gender-btn" id="genderBtnM" data-sex="M">&#9794; Male</button>
+            </div>
+          </div>
+
+          <div class="body-callout-stage">
+            <div class="callout-column">
+              <div class="callout-box status-nominal" id="calloutBrain">
+                <div class="callout-box-head">
+                  <strong>&larr; Brain &amp; Eyes (Neuro-Ocular)</strong>
+                  <span class="callout-risk-tag status-nominal" id="tagBrain">26% Strain</span>
+                </div>
+                <p id="descBrain">Fluid shifts upward in 0g, gently increasing pressure behind the eyes. Currently
+                  within safe limits.</p>
+              </div>
+
+              <div class="callout-box status-nominal" id="calloutMarrow">
+                <div class="callout-box-head">
+                  <strong>&larr; Immune System &amp; Marrow</strong>
+                  <span class="callout-risk-tag status-nominal" id="tagMarrow">16% Strain</span>
+                </div>
+                <p id="descMarrow">Bone marrow produces white blood cells. Shielding keeps space radiation stress low
+                  right now.</p>
+              </div>
+            </div>
+
+            <div class="hologram-center-box">
+              <div class="hologram-stage">
+                <img src="body_medical.png" id="hologramImg" alt="Wide Anatomical Medical Body Model"
+                  class="hologram-img female-morph" />
+                <svg class="hologram-overlay-svg" viewBox="0 0 370 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="162" y1="54" x2="8" y2="54" stroke="#0284c7" stroke-width="1.6" stroke-dasharray="4 3" />
+                  <line x1="145" y1="220" x2="8" y2="220" stroke="#0284c7" stroke-width="1.6" stroke-dasharray="4 3" />
+                  <line x1="212" y1="142" x2="362" y2="142" stroke="#0284c7" stroke-width="1.6"
+                    stroke-dasharray="4 3" />
+                  <line x1="215" y1="305" x2="362" y2="305" stroke="#0284c7" stroke-width="1.6"
+                    stroke-dasharray="4 3" />
+
+                  <g id="organ-brain" class="organ-hotspot" data-organ="brain">
+                    <ellipse class="organ-shape" cx="185" cy="54" rx="28" ry="22" fill="#059669" fill-opacity="0.28"
+                      stroke="#059669" stroke-width="1.5" />
+                    <circle class="organ-core" cx="185" cy="54" r="7" fill="#059669" />
+                  </g>
+                  <g id="organ-lungs" class="organ-hotspot" data-organ="lungs">
+                    <ellipse class="organ-shape" cx="158" cy="138" rx="22" ry="30" fill="#059669" fill-opacity="0.24"
+                      stroke="#059669" stroke-width="1.5" />
+                    <ellipse class="organ-shape" cx="212" cy="138" rx="22" ry="30" fill="#059669" fill-opacity="0.24"
+                      stroke="#059669" stroke-width="1.5" />
+                    <circle class="organ-core" cx="158" cy="138" r="6" fill="#059669" />
+                    <circle class="organ-core" cx="212" cy="138" r="6" fill="#059669" />
+                  </g>
+                  <g id="organ-heart" class="organ-hotspot" data-organ="heart">
+                    <circle class="organ-shape" cx="192" cy="148" r="18" fill="#059669" fill-opacity="0.32"
+                      stroke="#059669" stroke-width="1.5" />
+                    <circle class="organ-core" cx="192" cy="148" r="7" fill="#059669" />
+                  </g>
+                  <g id="organ-marrow" class="organ-hotspot" data-organ="marrow">
+                    <ellipse class="organ-shape" cx="185" cy="220" rx="40" ry="18" fill="#059669" fill-opacity="0.25"
+                      stroke="#059669" stroke-width="1.5" />
+                    <circle class="organ-core" cx="185" cy="220" r="7" fill="#059669" />
+                  </g>
+                  <g id="organ-bone" class="organ-hotspot" data-organ="bone">
+                    <rect class="organ-shape" x="144" y="265" width="22" height="82" rx="10" fill="#059669"
+                      fill-opacity="0.24" stroke="#059669" stroke-width="1.5" />
+                    <rect class="organ-shape" x="204" y="265" width="22" height="82" rx="10" fill="#059669"
+                      fill-opacity="0.24" stroke="#059669" stroke-width="1.5" />
+                    <circle class="organ-core" cx="155" cy="306" r="6.5" fill="#059669" />
+                    <circle class="organ-core" cx="215" cy="306" r="6.5" fill="#059669" />
+                  </g>
+                </svg>
+              </div>
+              <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);" id="hologramSexBadge">
+                &#9792; FEMALE 0g MODEL</div>
+            </div>
+
+            <div class="callout-column">
+              <div class="callout-box status-nominal" id="calloutCardio">
+                <div class="callout-box-head">
+                  <strong>Heart &amp; Lungs &rarr;</strong>
+                  <span class="callout-risk-tag status-nominal" id="tagCardio">20% Strain</span>
+                </div>
+                <p id="descCardio">Heart pumps slightly less blood volume in 0g, while lungs exchange oxygen and cabin
+                  CO2 normally.</p>
+              </div>
+
+              <div class="callout-box status-nominal" id="calloutBone">
+                <div class="callout-box-head">
+                  <strong>Spine &amp; Leg Bones &rarr;</strong>
+                  <span class="callout-risk-tag status-nominal" id="tagBone">34% Strain</span>
+                </div>
+                <p id="descBone">Without gravity pushing down on legs, bones slowly lose calcium unless protected by
+                  daily ARED resistance exercise.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VITALS & PLAIN-LANGUAGE ACTION PLAN -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" id="selectedCrewHeader">Astronaut Live Vitals</span>
+              <button class="btn-secondary" id="baselineToggleBtn" style="padding:4px 10px; font-size:11px;">0g Space
+                Baseline: ON</button>
+            </div>
+            <p id="rollingTrendBanner" style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">
+              Resting HR stable &bull; Sleep averaging 7.5h/night.
+            </p>
+            <div class="vitals-grid">
+              <div class="vital-box" id="boxHR">
+                <div class="vital-name" id="labelHR">[OK] Heart Rate</div>
+                <div class="vital-reading" id="vitalHR">58 <span class="vital-unit">bpm</span></div>
+                <div class="vital-baseline" id="vitalHRBase">0g Base: 58 bpm</div>
+              </div>
+              <div class="vital-box" id="boxHRV">
+                <div class="vital-name" id="labelHRV">[OK] Stress / HRV</div>
+                <div class="vital-reading" id="vitalHRV">61 <span class="vital-unit">ms</span></div>
+                <div class="vital-baseline" id="vitalHRVBase">Recovery balance</div>
+              </div>
+              <div class="vital-box" id="boxSpO2">
+                <div class="vital-name" id="labelSpO2">[OK] Oxygen &amp; BP</div>
+                <div class="vital-reading" id="vitalSpO2">97.3 <span class="vital-unit">%</span></div>
+                <div class="vital-baseline" id="vitalSpO2Base">BP: 111/74 mmHg</div>
+              </div>
+              <div class="vital-box" id="boxSANS">
+                <div class="vital-name" id="labelSANS">[OK] Eye Nerve</div>
+                <div class="vital-reading" id="vitalSANS">5.49 <span class="vital-unit">mm</span></div>
+                <div class="vital-baseline" id="vitalSANSBase">Safe &lt; 5.6 mm</div>
+              </div>
+              <div class="vital-box" id="boxRR">
+                <div class="vital-name" id="labelRR">[OK] Breathing</div>
+                <div class="vital-reading" id="vitalRR">14 <span class="vital-unit">br/m</span></div>
+                <div class="vital-baseline" id="vitalRRBase">Glucose: 88 mg/dL</div>
+              </div>
+              <div class="vital-box" id="boxTemp">
+                <div class="vital-name" id="labelTemp">[OK] Body Temp</div>
+                <div class="vital-reading" id="vitalTemp">36.9 <span class="vital-unit">&deg;C</span></div>
+                <div class="vital-baseline" id="vitalTempBase">0g Shift (+0.3&deg;C)</div>
+              </div>
+            </div>
+            <canvas id="ecgCanvas" width="760" height="60"
+              style="width:100%; margin-top:12px; background:#0c2340; border-radius:8px;"></canvas>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="step4_action">Clear Action Plan (What Should the Crew Do?)</span>
+              <span class="card-badge" id="triageLevelBadge">LEVEL 1: ROUTINE CARE</span>
+            </div>
+
+            <div class="escalation-ladder">
+              <div class="esc-step active-level-1" id="escStep1"><strong>Level 1: Self-Care</strong>
+                <div>Astronaut handles it</div>
+              </div>
+              <div class="esc-step" id="escStep2"><strong>Level 2: Crew Doctor</strong>
+                <div>Onboard medical check</div>
+              </div>
+              <div class="esc-step" id="escStep3"><strong>Level 3: Urgent Alert</strong>
+                <div id="escStep3Sub">Send to Earth (27.8m)</div>
+              </div>
+            </div>
+
+            <div class="triage-alert-banner" id="triageBanner">
+              <div class="triage-headline" id="triageHeadline">All Vitals Normal for Spaceflight</div>
+              <div class="triage-rationale" id="triageRationale">No action needed beyond daily exercise and sleep
+                schedule.</div>
+            </div>
+
+            <div class="protocol-list" id="protocolList" style="margin-bottom:12px;"></div>
+
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn-primary" id="speakBriefingBtn" style="padding:7px 14px; font-size:12.5px;">&#128266;
+                Listen to Voice Briefing</button>
+              <button class="btn-secondary" id="stopBriefingBtn"
+                style="padding:7px 12px; font-size:12.5px;">Stop</button>
+              <span id="voiceTranscriptBox" style="font-size:12px; color:var(--text-muted); flex:1;">Click to hear a
+                plain-English summary.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 3: INTERACTIVE LAB (3 TOOLS, NONE AUTO-OPENED ON ENTRY)      -->
+    <!-- ================================================================= -->
+    <section id="page-interactive" class="page-section">
+      <div class="mission-banner" style="text-align:center;">
+        <h2 style="font-size:24px; margin-bottom:6px;" data-i18n="inter_hero_t">Want to be one of the astronauts on this
+          mission?</h2>
+        <p style="color:var(--blue-primary); font-size:15px; font-weight:600; margin-bottom:8px;"
+          data-i18n="inter_hero_s">
+          These 3 interactive tools are designed for both real astronauts and anyone curious about space!
+        </p>
+        <p style="font-size:13.5px; color:var(--text-body); max-width:780px; margin:0 auto;"
+          data-i18n="inter_hero_desc">
+          Select any of the 3 tools below to test your pulse via webcam, challenge your spacewalk reaction speed, or
+          simulate 30-day medical decisions.
+        </p>
+      </div>
+
+      <!-- NASA MISSION ROUTINE & GAMIFICATION BAR -->
+      <div class="card"
+        style="margin-bottom:18px; padding:12px 18px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; background:var(--bg-blue-tint);">
+        <div style="font-size:13px; color:var(--blue-navy);">
+          <strong data-i18n="routine_lbl">Mission Routine Prompt:</strong>
+          <span data-i18n="routine_msg">Complete your daily pulse scan, reflex check, and 30-day simulation to maintain
+            crew readiness.</span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="card-badge" id="streakCounterPill">&#9733; 14-Day Streak (700 Mission Pts)</span>
+          <span class="card-badge" data-i18n="badge_bone">&#128737; Bone Guardian</span>
+        </div>
+      </div>
+
+      <!-- 3 TOOL SELECTOR CARDS -> LEFT SIDEBAR / RIGHT WORKSPACE WHEN ACTIVE -->
+      <div class="interactive-workspace" id="interactiveWorkspace">
+        <div class="interactive-3-grid">
+          <button class="inter-mode-card" data-inter="inter-camera">
+            <div>
+              <span class="card-badge">TOOL 01</span>
+              <h3 data-i18n="sub_camera_t">Camera &amp; Voice Analysis</h3>
+              <p data-i18n="sub_camera_d">Contactless optical pulse (rPPG), vocal stress tremor, breathing rate, and
+                fatigue scan.</p>
+            </div>
+            <div class="inter-visual-footer" style="height:135px;">
+              <img src="inter_camera_real.png" alt="Astronaut Optical Vital-Signs Scanner"
+                style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+            <span class="feature-link" style="margin-top:10px; font-size:12px;" data-i18n="open_tool">Open Tool
+              &rarr;</span>
+          </button>
+
+          <button class="inter-mode-card" data-inter="inter-attention">
+            <div>
+              <span class="card-badge">TOOL 02</span>
+              <h3 data-i18n="sub_attn_t">Astronaut Attention Test</h3>
+              <p data-i18n="sub_attn_d">Scientific Psychomotor Vigilance Test (PVT) putting you in the spacesuit during
+                an EVA.</p>
+            </div>
+            <div class="inter-visual-footer" style="height:135px;">
+              <img src="inter_eva_real.png" alt="EVA Spacewalk Attention Test"
+                style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+            <span class="feature-link" style="margin-top:10px; font-size:12px;" data-i18n="open_tool">Open Tool
+              &rarr;</span>
+          </button>
+
+          <button class="inter-mode-card" data-inter="inter-quiz">
+            <div>
+              <span class="card-badge">TOOL 03</span>
+              <h3 data-i18n="sub_quiz_t">30-Day Treatment Quiz</h3>
+              <p data-i18n="sub_quiz_d">Pick a space crisis, answer 6 step-by-step medical choices, and reveal your
+                30-day graph.</p>
+            </div>
+            <div class="inter-visual-footer" style="height:135px;">
+              <img src="inter_quiz_real.png" alt="30-Day Space Medical Console"
+                style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+            <span class="feature-link" style="margin-top:10px; font-size:12px;" data-i18n="open_tool">Open Tool
+              &rarr;</span>
+          </button>
+        </div>
+
+        <div class="inter-panels-stage">
+          <div class="inter-back-bar">
+            <button class="btn-secondary" id="interBackHubBtn" style="padding:6px 12px; font-size:12px;"
+              data-i18n="inter_back_all">&larr; All 3 Tools</button>
+            <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);"
+              data-i18n="inter_switch_hint">Switch tools anytime on the left</span>
+          </div>
+
+          <!-- SUBPANEL 1: CAMERA & VOICE ANALYSIS -->
+          <div id="inter-camera" class="inter-subpanel">
+            <div class="inter-summary-strip" data-i18n="sum_camera">
+              <strong>Summary &amp; Purpose:</strong> This tool uses your webcam and microphone to measure your heart
+              rate, breathing, and voice stress without wearing any sensors&mdash;helping astronauts monitor health
+              hands-free.
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="cam_title">1. Detailed Contactless Camera &amp; Voice Stress
+                  Analysis</span>
+                <span class="card-badge">WebRTC rPPG + WebAudio</span>
+              </div>
+              <div class="grid-2" style="align-items:center;">
+                <div class="webcam-preview-row">
+                  <div class="video-frame">
+                    <video id="webcamVideo" autoplay muted playsinline style="display:none;"></video>
+                    <div class="video-placeholder" id="videoPlaceholder" style="font-size:12px; color:#ffffff;">CAMERA
+                      OFF</div>
+                  </div>
+                  <div>
+                    <button class="btn-primary" id="hwScanBtn" style="width:100%; margin-bottom:10px;"
+                      data-i18n="btn_scan">
+                      Start Camera &amp; Voice Scan
+                    </button>
+                    <p style="font-size:13px; color:var(--text-body);" data-i18n="cam_how">
+                      <strong>How it works:</strong> Your camera detects tiny light changes in facial blood flow (rPPG)
+                      while your mic measures vocal cord micro-tremor (F0 jitter) to estimate stress and fatigue.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="vitals-grid" style="grid-template-columns:repeat(2,1fr);">
+                  <div class="vital-box">
+                    <div class="vital-name" data-i18n="lbl_scan_stat">Scanner Status</div>
+                    <div class="vital-reading" style="font-size:16px;" id="hwStatusText">STANDBY</div>
+                    <div class="vital-baseline">Ready to calibrate</div>
+                  </div>
+                  <div class="vital-box">
+                    <div class="vital-name" data-i18n="lbl_pulse">Optical Pulse (rPPG)</div>
+                    <div class="vital-reading" id="hwRppgVal">-- bpm</div>
+                    <div class="vital-baseline">Normal 0g: 55–80 bpm</div>
+                  </div>
+                  <div class="vital-box">
+                    <div class="vital-name" data-i18n="lbl_voice">Vocal Stress Tremor</div>
+                    <div class="vital-reading" style="font-size:18px;" id="hwVoiceVal">0.42% F0</div>
+                    <div class="vital-baseline">&lt; 0.8% = calm voice</div>
+                  </div>
+                  <div class="vital-box">
+                    <div class="vital-name" data-i18n="lbl_resp">Estimated Resp / Fatigue</div>
+                    <div class="vital-reading" style="font-size:18px;" id="hwRespVal">14 br/m</div>
+                    <div class="vital-baseline" id="hwFatigueText">Facial alertness: Optimal</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBPANEL 2: ASTRONAUT ATTENTION TEST (PVT) -->
+          <div id="inter-attention" class="inter-subpanel">
+            <div class="inter-summary-strip" data-i18n="sum_attention">
+              <strong>Summary &amp; Purpose:</strong> Modeled on NASA's Psychomotor Vigilance Task (PVT), this test
+              measures your reaction speed in milliseconds to detect sleep debt or cabin CO<sub>2</sub> buildup before
+              risky spacewalks.
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="attn_title">2. Scientific Astronaut Attention Test (NASA PVT
+                  Simulation)</span>
+                <span class="card-badge" id="pvtLatencyBadge">Last Score: 268 ms</span>
+              </div>
+              <p style="font-size:14px; color:var(--text-body); margin-bottom:14px;" data-i18n="attn_role">
+                <strong>Mission Roleplay:</strong> You are piloting the Mars lander and monitoring an exterior spacewalk
+                (EVA). Tap the panel the instant the hazard signal turns green!
+              </p>
+              <div class="grid-2" style="align-items:center;">
+                <div>
+                  <div class="pvt-target" id="pvtTarget" data-i18n="pvt_start">CLICK HERE TO START EVA REACTION TEST
+                  </div>
+                  <div style="margin-top:12px;">
+                    <span style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;"
+                      data-i18n="lbl_mood">Pre-Test Crew Energy State:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                      <button class="gender-btn mood-btn" data-mood="1">1: Exhausted</button>
+                      <button class="gender-btn mood-btn" data-mood="2">2: Stressed</button>
+                      <button class="gender-btn mood-btn" data-mood="3">3: Steady</button>
+                      <button class="gender-btn mood-btn active" data-mood="4">4: Focused</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="differential-output" id="pvtFeedbackBox">
+                  <strong style="color:var(--blue-primary); display:block; margin-bottom:6px;">Astronaut Evaluation:
+                    Steady Baseline (268 ms)</strong>
+                  <p>
+                    &bull; <strong>&lt; 260 ms:</strong> Elite EVA / Docking Ready.<br>
+                    &bull; <strong>260–330 ms:</strong> Normal Ship Duty.<br>
+                    &bull; <strong>&gt; 330 ms:</strong> Cognitive Fatigue &mdash; check cabin CO<sub>2</sub> or rest!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBPANEL 3: 30-DAY QUIZ (CENTERED WHITE BOX OVER SPACE BACKDROP -> GRAPH RESULT) -->
+          <div id="inter-quiz" class="inter-subpanel">
+            <div class="inter-summary-strip" data-i18n="sum_quiz">
+              <strong>Summary &amp; Purpose:</strong> Choose a space crisis and answer 6 sequential medical questions
+              inside the mission console. Your choices reveal a 30-day Purple trajectory compared against Red (no
+              treatment) and Green (optimal NASA care).
+            </div>
+            <div class="space-stage-bg" style="background-image:url('space_backdrop.png');">
+              <div class="white-stage-card" id="quizStageCard">
+                <div style="margin-bottom:16px;">
+                  <div class="card-header" style="margin-bottom:10px;">
+                    <span class="card-title" data-i18n="quiz_scen_t">Step 1: Choose Scenario for Your 30-Day
+                      Simulation</span>
+                    <span class="card-badge" id="quizStepBadge">Question 1 of 6</span>
+                  </div>
+                  <div class="scenario-cards-grid" style="margin-bottom:0;">
+                    <button class="btn-scenario active" data-scenario="nominal">
+                      <div class="scen-card-top"><span>01</span><span>0.00g</span></div>
+                      <div class="scen-card-name">Nominal Transit</div>
+                    </button>
+                    <button class="btn-scenario" data-scenario="co2_fault">
+                      <div class="scen-card-top"><span>02</span><span>AIR</span></div>
+                      <div class="scen-card-name">CO2 Fault</div>
+                    </button>
+                    <button class="btn-scenario" data-scenario="solar_storm">
+                      <div class="scen-card-top"><span>03</span><span>RAD</span></div>
+                      <div class="scen-card-name">Solar Storm</div>
+                    </button>
+                    <button class="btn-scenario" data-scenario="sans_decond">
+                      <div class="scen-card-top"><span>04</span><span>SANS</span></div>
+                      <div class="scen-card-name">Eye &amp; Bone</div>
+                    </button>
+                    <button class="btn-scenario" data-scenario="isolation_fatigue">
+                      <div class="scen-card-top"><span>05</span><span>SLEEP</span></div>
+                      <div class="scen-card-name">Sleep Fatigue</div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- QUESTION STAGE (HIDDEN WHEN QUIZ FINISHES) -->
+                <div id="quizQuestionStage">
+                  <div id="quizContainer"></div>
+                </div>
+
+                <!-- RESULT GRAPH STAGE (REVEALED AFTER ALL 6 QUESTIONS ARE ANSWERED) -->
+                <div id="quizResultStage" style="display:none;">
+                  <div class="card-header">
+                    <span class="card-title" data-i18n="quiz_graph_t">30-Day Health Trajectory Result</span>
+                    <span class="card-badge">3-Curve Comparison</span>
+                  </div>
+                  <canvas id="forecastCanvas" width="740" height="210"
+                    style="width:100%; background:#0c2340; border-radius:10px; margin-bottom:12px;"></canvas>
+                  <div
+                    style="font-size:13px; color:var(--text-body); display:flex; flex-direction:column; gap:5px; margin-bottom:14px;">
+                    <div><strong style="color:#dc2626;">&#9632; Red Line:</strong> <span data-i18n="leg_red">No
+                        treatment / ignored symptoms over 30 days.</span></div>
+                    <div><strong style="color:#059669;">&#9632; Green Line:</strong> <span data-i18n="leg_green">Full
+                        recommended NASA countermeasures followed.</span></div>
+                    <div><strong style="color:#7c3aed;">&#9632; Purple Line:</strong> <strong
+                        data-i18n="leg_purple">Your Quiz Choices!</strong> (<span id="userQuizOutcomeText"></span>)
+                    </div>
+                  </div>
+                  <button class="btn-primary" id="restartQuizBtn" style="width:100%;"
+                    data-i18n="btn_restart_quiz">Retake 6-Question Quiz &rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SPACE VISUAL FILLER SO RIGHT STAGE NEVER HAS EMPTY WHITE VOID -->
+          <div class="inter-space-filler" style="background-image:url('space_backdrop.png');">
+            <div style="max-width:560px;">
+              <span class="card-badge"
+                style="background:rgba(56,189,248,0.22); color:#e0f2fe; border-color:rgba(56,189,248,0.45);"
+                data-i18n="inter_fill_badge">DEEP-SPACE MISSION READINESS</span>
+              <h4 style="font-size:19px; margin:8px 0 4px; color:#ffffff;" data-i18n="inter_fill_t">Real-Time
+                Physiological &amp; Cognitive Checkpoints</h4>
+              <p style="font-size:13px; color:#e0f2fe; line-height:1.5; margin:0;" data-i18n="inter_fill_d">
+                All interactive lab measurements stay 100% on your device, helping crews and Earth users monitor cardiac
+                rhythm, EVA alertness, and 30-day countermeasure impact offline.
+              </p>
+            </div>
+            <img src="mission_hero.png" alt="Deep Space Observatory"
+              style="width:180px; height:110px; object-fit:cover; border-radius:12px; border:2px solid rgba(125,211,252,0.6);" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 4: INDEPENDENT SELF-DIAGNOSIS, PRESCRIPTION & TIME PLAN      -->
+    <!-- ================================================================= -->
+    <section id="page-diagnosis" class="page-section">
+      <div class="space-stage-bg" style="background-image:url('mission_hero.png');">
+        <div class="white-stage-card">
+          <div class="card-header">
+            <span class="card-title" data-i18n="diag_title">Astronaut Self-Diagnosis &amp; Personalized
+              Prescription</span>
+            <span class="card-badge">4-Step Clinical Wizard</span>
+          </div>
+
+          <div class="wizard-progress">
+            <span class="wiz-pill active" id="diagPill1" data-i18n="diag_p1">1. Location</span>
+            <span class="wiz-pill" id="diagPill2" data-i18n="diag_p2">2. Mission Time</span>
+            <span class="wiz-pill" id="diagPill3" data-i18n="diag_p3">3. Symptoms</span>
+            <span class="wiz-pill" id="diagPill4" data-i18n="diag_p4">4. Prescription &amp; Plan</span>
+          </div>
+
+          <!-- DIAGNOSIS STEP 1: LOCATION / ENVIRONMENT -->
+          <div id="diagStep1" class="wizard-step active">
+            <h3 style="font-size:17px; color:var(--blue-navy); margin-bottom:10px;" data-i18n="diag_q1">Step 1: Where
+              are you currently located?</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:10px;">
+              <button class="quiz-opt-btn diag-env-btn" data-env="transit_0g">Deep-Space Transit Spacecraft
+                (0.00g)</button>
+              <button class="quiz-opt-btn diag-env-btn" data-env="station_leo">Orbital Space Station LEO
+                (0.00g)</button>
+              <button class="quiz-opt-btn diag-env-btn" data-env="lunar_base">Lunar Surface Base (0.16g)</button>
+              <button class="quiz-opt-btn diag-env-btn" data-env="mars_surface">Mars Surface Habitat (0.38g)</button>
+              <button class="quiz-opt-btn diag-env-btn" data-env="planetary_rover">Pressurized Rover / EVA Suit
+                (0.16–0.38g)</button>
+            </div>
+          </div>
+
+          <!-- DIAGNOSIS STEP 2: TOTAL MISSION DAYS -->
+          <div id="diagStep2" class="wizard-step">
+            <h3 style="font-size:17px; color:var(--blue-navy); margin-bottom:10px;" data-i18n="diag_q2">Step 2: How long
+              have you been on this space mission?</h3>
+            <div
+              style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:14px;">
+              <button class="quiz-opt-btn diag-day-btn" data-days="18">1–30 Days (Early Adaptation)</button>
+              <button class="quiz-opt-btn diag-day-btn" data-days="65">31–90 Days (Mid-Flight)</button>
+              <button class="quiz-opt-btn diag-day-btn" data-days="142">91–180 Days (Long Transit)</button>
+              <button class="quiz-opt-btn diag-day-btn" data-days="235">180+ Days (Extended Deep Space)</button>
+            </div>
+            <button class="btn-secondary" id="diagBack1" style="font-size:12px;">&larr; Back</button>
+          </div>
+
+          <!-- DIAGNOSIS STEP 3: SYMPTOM CHECKLIST -->
+          <div id="diagStep3" class="wizard-step">
+            <h3 style="font-size:17px; color:var(--blue-navy); margin-bottom:8px;" data-i18n="diag_q3">Step 3: Select
+              all symptoms you are experiencing</h3>
+            <div style="font-size:12.5px; font-weight:700; color:var(--blue-navy); margin-bottom:4px;"
+              data-i18n="lbl_sym_common">Common Spaceflight Symptoms:</div>
+            <div class="symptom-chips">
+              <button class="symptom-chip" data-symptom="headache">+ Frontal Headache</button>
+              <button class="symptom-chip" data-symptom="cephalad">+ Eye / Sinus Pressure</button>
+              <button class="symptom-chip" data-symptom="phosphenes">+ Light Flashes</button>
+              <button class="symptom-chip" data-symptom="orthostatic">+ Dizziness Standing</button>
+              <button class="symptom-chip" data-symptom="insomnia">+ Poor Sleep</button>
+              <button class="symptom-chip" data-symptom="back_pain">+ Lower Back Pain</button>
+            </div>
+            <div style="font-size:12.5px; font-weight:700; color:#991b1b; margin-bottom:4px;"
+              data-i18n="lbl_sym_urgent">Urgent Medical Symptoms (Immediate Priority):</div>
+            <div class="symptom-chips">
+              <button class="symptom-chip red-flag" data-symptom="rf_chest_pain">[Urgent] Chest Pain</button>
+              <button class="symptom-chip red-flag" data-symptom="rf_vision_loss">[Urgent] Sudden Vision Loss</button>
+              <button class="symptom-chip red-flag" data-symptom="rf_neck_swelling">[Urgent] Neck Vein Swelling</button>
+              <button class="symptom-chip red-flag" data-symptom="rf_syncope">[Urgent] Fainting / Syncope</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:16px; gap:10px; flex-wrap:wrap;">
+              <button class="btn-secondary" id="diagBack2">&larr; Back</button>
+              <button class="btn-primary" id="diagToStep4Btn" data-i18n="btn_gen_rx">Generate Prescription &amp; Time
+                Plan &rarr;</button>
+            </div>
+          </div>
+
+          <!-- DIAGNOSIS STEP 4: PRESCRIPTION, TIME PLAN & PRINT-ONLY PDF -->
+          <div id="diagStep4" class="wizard-step">
+            <div id="prescriptionPrintArea" class="rx-box">
+              <div class="rx-header">
+                <div>
+                  <strong style="font-size:16px; color:var(--blue-navy);" data-i18n="rx_header_t">ARES-MED Spaceflight
+                    Prescription &amp; Care Plan</strong>
+                  <div style="font-size:12px; color:var(--text-muted);" id="rxMetaSummary">Location: Deep-Space Transit
+                    &bull; Mission Day 142</div>
+                </div>
+                <span class="card-badge">Rx &bull; NASA IMM CDS</span>
+              </div>
+
+              <div id="differentialOutput" class="differential-output" style="margin-bottom:14px;">
+                Select symptoms in Step 3 to view tailored clinical assessment.
+              </div>
+
+              <div style="font-weight:800; font-size:13.5px; color:var(--blue-navy); margin-bottom:6px;"
+                data-i18n="tp_heading">
+                Structured Treatment Time Plan:
+              </div>
+              <div class="time-plan-grid" id="rxTimePlanGrid">
+                <div class="tp-card">
+                  <strong data-i18n="tp_1_t">Immediate (0–15 min)</strong>
+                  <p id="tpNow">Verify cabin ppCO2 (&lt; 3.0 mmHg) and hydration status; rest in neutral posture.</p>
+                </div>
+                <div class="tp-card">
+                  <strong data-i18n="tp_2_t">Short-Term (1–6 hours)</strong>
+                  <p id="tpShort">Complete targeted countermeasure (LBNP / ventilation / analgesia per checklist) and
+                    re-check vitals.</p>
+                </div>
+                <div class="tp-card">
+                  <strong data-i18n="tp_3_t">Follow-Up (24–72 hours)</strong>
+                  <p id="tpFollow">Log daily ocular/PVT trend and transmit HL7 FHIR bundle to Flight Surgeon.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;" class="no-print">
+              <button class="btn-primary" id="printReportBtn" data-i18n="btn_pdf">Save Prescription PDF</button>
+              <button class="btn-secondary" id="downloadFhirBtn" data-i18n="btn_dl_fhir">Download FHIR JSON</button>
+              <button class="btn-secondary" id="diagRestartBtn" data-i18n="btn_new_diag">&larr; New Diagnosis</button>
+            </div>
+            <div style="margin-top:12px;" class="no-print">
+              <div class="fhir-box" id="fhirOutput" style="height:120px; max-height:120px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 5: REFERENCES & NASA DATA LINEAGE (BOTTOM MENU SECTION)       -->
+    <!-- ================================================================= -->
+    <section id="page-references" class="page-section">
+      <div class="lineage-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px;">
+          <div>
+            <span class="card-badge">NASA DATA LINEAGE &amp; METHODOLOGY</span>
+            <h2 style="font-size:24px; color:var(--blue-navy); margin-top:8px;" data-i18n="lineage_title">Official NASA
+              References &rarr; ARES-MED Metric Mapping</h2>
+            <p style="font-size:13.5px; color:var(--text-body); margin-top:4px;" data-i18n="lineage_sub">Every
+              physiological threshold, trajectory curve, and triage escalation rule in ARES-MED traces directly to open
+              NASA human spaceflight datasets and standards.</p>
+          </div>
+          <span class="lineage-pill">100% Evidence-Grounded</span>
+        </div>
+        <div class="lineage-table-wrap">
+          <table class="lineage-table">
+            <thead>
+              <tr>
+                <th data-i18n="lin_col_src">NASA Source / Standard</th>
+                <th data-i18n="lin_col_dom">Scientific Domain</th>
+                <th data-i18n="lin_col_met">Mapped ARES-MED Metrics</th>
+                <th data-i18n="lin_col_app">Module in Website</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>NASA-STD-3001 Vol. 1 &amp; 2</strong><br /><span
+                    style="font-size:11.5px; color:var(--text-muted);">Rev 2022 Crew Health Standard</span></td>
+                <td data-i18n="lin_r1_dom">Spaceflight Human Integration &amp; Environmental Limits</td>
+                <td data-i18n="lin_r1_met">SpO2, Heart Rate, HRV (RMSSD), Blood Pressure, Habitat ppCO2, Career
+                  Radiation (mSv)</td>
+                <td><span class="lineage-pill" data-i18n="lin_r1_app">Mission Scenarios &amp; 3D Body</span></td>
+              </tr>
+              <tr>
+                <td><strong>NASA Twins Study</strong><br /><span
+                    style="font-size:11.5px; color:var(--text-muted);">Garrett-Bakelman et al., Science 2019</span></td>
+                <td data-i18n="lin_r2_dom">Longitudinal Microgravity Adaptation &amp; Recovery</td>
+                <td data-i18n="lin_r2_met">SANS Optic Nerve Sheath (ONSD mm), Metabolic Shift, Stress &amp; Recovery
+                  Curves</td>
+                <td><span class="lineage-pill" data-i18n="lin_r2_app">30-Day Quiz &amp; Forecast Graph</span></td>
+              </tr>
+              <tr>
+                <td><strong>NASA OSDR (OSD-570 / OSD-571)</strong><br /><span
+                    style="font-size:11.5px; color:var(--text-muted);">Open Science Data Repository</span></td>
+                <td data-i18n="lin_r3_dom">Spaceflight Multi-Omics, Bone &amp; Fluid Dynamics</td>
+                <td data-i18n="lin_r3_met">Estimated BMD Delta (%), Cephalad Fluid Shift, Circadian Sleep-Fatigue Drift
+                </td>
+                <td><span class="lineage-pill" data-i18n="lin_r3_app">30-Day Model &amp; HL7 FHIR</span></td>
+              </tr>
+              <tr>
+                <td><strong>NASA HRP ExMC CDS &amp; TRISH HERMES</strong><br /><span
+                    style="font-size:11.5px; color:var(--text-muted);">Autonomous Exploration Medical Systems</span>
+                </td>
+                <td data-i18n="lin_r4_dom">Delay-Tolerant Clinical Decision Support</td>
+                <td data-i18n="lin_r4_met">Level 1–3 Triage Escalation, Store-and-Forward Earth Telemetry Bundle (OWLT)
+                </td>
+                <td><span class="lineage-pill" data-i18n="lin_r4_app">Diagnostic &amp; PDF Rx</span></td>
+              </tr>
+              <tr>
+                <td><strong>NASA Psychomotor Vigilance (PVT-B)</strong><br /><span
+                    style="font-size:11.5px; color:var(--text-muted);">Behavioral Health &amp; Performance</span></td>
+                <td data-i18n="lin_r5_dom">Cognitive Readiness Under EVA Stress</td>
+                <td data-i18n="lin_r5_met">Reaction Latency (ms), Attention Lapses (&gt;500 ms), False Starts &amp;
+                  Readiness Score</td>
+                <td><span class="lineage-pill" data-i18n="lin_r5_app">EVA Attention Test</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="card-header">
+          <span class="card-title" data-i18n="ref_sources_t">Primary Scientific &amp; Engineering References</span>
+          <span class="card-badge">Open Science</span>
+        </div>
+        <ul
+          style="padding-left:18px; font-size:13px; color:var(--text-body); display:flex; flex-direction:column; gap:8px;">
+          <li><strong>NASA-STD-3001 Vol. 1 &amp; 2 (Rev 2022):</strong> Spaceflight Human-System Standard for Crew
+            Health, Environmental Limits (ppCO2), and Radiation Exposure.</li>
+          <li><strong>Garrett-Bakelman et al. (2019):</strong> <em>The NASA Twins Study: A multidimensional analysis of
+              a year-long human spaceflight.</em> Science 364(6436).</li>
+          <li><strong>NASA Open Science Data Repository (OSDR):</strong> OSD-570 &amp; OSD-571 physiological/multi-omics
+            proxies for bone mineral density and fluid shifts.</li>
+          <li><strong>NASA Human Research Program (HRP) ExMC &amp; TRISH HERMES:</strong> Autonomous medical decision
+            support &amp; delay-tolerant HL7 FHIR store-and-forward architecture.</li>
+          <li><strong>Basner &amp; Dinges (2011) / NASA PVT-B:</strong> 3-minute Psychomotor Vigilance Test for
+            astronaut behavioral readiness and sleep-debt detection.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PAGE 6: FREQUENTLY ASKED QUESTIONS & CONTACT                       -->
+    <!-- ================================================================= -->
+    <section id="page-faq" class="page-section">
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <span class="card-title" data-i18n="faq_page_t">Frequently Asked Questions (FAQ)</span>
+          <span class="card-badge" data-i18n="home_faq_badge">How to Use This Site</span>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary data-i18n="faq1_q">How do I navigate the platform?</summary>
+            <p data-i18n="faq1_a">Use the centered navigation bar at the top anytime to jump between Home, About Us,
+              Mission &amp; Scenarios, Interactive Lab, Self-Diagnosis, References, and FAQ &amp; Contact.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq2_q">How does the 30-Day Treatment Quiz work?</summary>
+            <p data-i18n="faq2_a">Inside <strong>Interactive Lab &rarr; 30-Day Treatment Quiz</strong>, choose any space
+              scenario and answer sequential one-choice questions. The graph plots your personal decision curve
+              alongside untreated and optimal curves.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq3_q">Can I ask questions about any section?</summary>
+            <p data-i18n="faq3_a">Yes! Click the <strong>VitalsZero AI Assistant</strong> button in the bottom-right
+              corner anytime for instant explanations in English or Turkish.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq4_q">How does the Mission Day slider in the header affect the system?</summary>
+            <p data-i18n="faq4_a">Dragging the <strong>Mission Day (1&ndash;500)</strong> slider updates the
+              Earth&ndash;Mars communication delay (OWLT), cumulative radiation dose, SANS eye-nerve shift, and your HL7
+              FHIR packet in real time.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq5_q">Is my webcam and microphone data private?</summary>
+            <p data-i18n="faq5_a">100% private. All optical pulse (rPPG) and vocal tremor calculations run locally
+              inside your browser with zero video or audio uploaded to any server.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq6_q">Who can use ARES-MED besides astronauts?</summary>
+            <p data-i18n="faq6_a">Students, space enthusiasts, Flight Surgeons, and remote rural clinics without
+              specialist access can all use ARES-MED in English or Turkish.</p>
+          </details>
+        </div>
+
+      </div>
+
+      <div class="card"
+        style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
+        <div>
+          <strong style="font-size:16px; color:var(--blue-navy);" data-i18n="contact_title">Contact Team
+            VitalsZero</strong>
+          <p style="font-size:13.5px; color:var(--text-muted); margin-top:2px;" data-i18n="contact_sub">Elif Azra
+            &Ouml;zata &amp; Ali Manas Aydo&#287;mu&#351; &bull; NASA Space Apps Challenge 2026 &bull; vitalszero.health
+          </p>
+        </div>
+        <a href="mailto:vitalszero0@gmail.com" class="btn-primary"
+          style="text-decoration:none;">vitalszero0@gmail.com</a>
+      </div>
+    </section>
+
+    <!-- Hidden compatibility elements so existing engine bindings stay 100% error-free -->
+    <div style="display:none;">
+      <select id="customEnvMirror">
+        <option value="transit_0g">transit_0g</option>
+      </select>
+      <input type="range" id="medSlider" min="1" max="500" value="142" /><span id="envMedSliderVal"></span>
+      <input type="range" id="co2Slider" min="1.5" max="6.5" step="0.1" value="2.4" /><span id="envCo2SliderVal"></span>
+      <span id="valCareerRad"></span>
+      <div id="barCareerRad"></div><span id="envCo2Val"></span><span id="envRadVal"></span>
+      <span id="envSleepVal"></span><span id="envGlucoseVal"></span><span id="osdrMtDna"></span><span
+        id="osdrNtx"></span>
+      <span id="osdrIl6"></span><span id="osdrChoroid"></span>
+      <div id="barCardio"></div><span id="valCardio"></span>
+      <div id="barBone"></div><span id="valBone"></span>
+      <div id="barRad"></div><span id="valRad"></span>
+      <div id="barPsych"></div><span id="valPsych"></span>
+      <div id="barEclss"></div><span id="valEclss"></span>
+      <input id="inputHR" value="62" /><input id="inputSysBP" value="115" /><input id="inputSpO2" value="97.5" />
+      <input id="inputTemp" value="36.8" /><input id="inputGlucose" value="88" /><input id="inputSleep" value="7.5" />
+      <button id="applyManualMeasBtn"></button>
+      <div id="manualMeasExplanation"></div>
+    </div>
+
+  </main>
+
+  <!-- FLOATING AI SECTION ASSISTANT BOT -->
+  <button class="ai-fab" id="aiBotToggle">
+    <img src="astronaut_mascot.jpg" alt="VitalsZero AI Mascot" class="ai-fab-avatar" />
+    <span data-i18n="ai_fab">Ask VitalsZero AI</span>
+  </button>
+  <div class="ai-panel" id="aiBotPanel" role="dialog" aria-label="VitalsZero AI Assistant">
+    <div class="ai-panel-head">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <img src="astronaut_mascot.jpg" alt="VitalsZero AI Mascot" class="ai-fab-avatar"
+          style="width:28px; height:28px;" />
+        <span data-i18n="ai_head">VitalsZero Section Assistant</span>
+      </div>
+      <button id="aiBotClose"
+        style="background:none; border:none; color:#ffffff; font-size:18px; cursor:pointer;">&times;</button>
+    </div>
+    <div class="ai-messages" id="aiMessages">
+      <div class="ai-msg bot" data-i18n="ai_welcome">
+        Hello! I know every section of ARES-MED. Ask me about our NASA datasets, the 5 space scenarios, the webcam
+        scanner, or the 30-day treatment quiz!
+      </div>
+    </div>
+    <div class="ai-quick-chips">
+      <button class="ai-chip" data-q="spaceapps">NASA Space Apps?</button>
+      <button class="ai-chip" data-q="ares">What is ARES-MED?</button>
+      <button class="ai-chip" data-q="nasa">NASA Data Used?</button>
+      <button class="ai-chip" data-q="2x+4=10">Math: 2x+4=10</button>
+    </div>
+    <div class="ai-input-row">
+      <input type="text" id="aiInput" placeholder="Ask about any section..." />
+      <button class="btn-primary" id="aiSendBtn" style="padding:7px 14px;">Send</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span><strong>VitalsZero</strong> &bull; Elif Azra &Ouml;zata &amp; Ali Manas Aydo&#287;mu&#351; &bull; <a
+        href="mailto:vitalszero0@gmail.com"
+        style="color:var(--blue-primary); font-weight:600;">vitalszero0@gmail.com</a></span>
+    <span>ARES-MED &bull; Grounded in NASA OSDR, HRP ExMC CDS, TRISH HERMES &amp; Twins Study</span>
+  </footer>
+
+  <script src="engine.js"></script>
+</body>
+
+</html>

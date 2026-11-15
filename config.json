@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "system": "ARES-MED v5.0 Clinical Decision Support Config",
+    "team": "VitalsZero",
+    "disclaimer": "DECISION SUPPORT ONLY: ARES-MED is an educational prototype using simulated telemetry inspired by published NASA Human Research Program (HRP) studies. Not a certified medical device or diagnostic tool.",
+    "careerRadiationLimitMsv": 600,
+    "careerLimitSource": "NASA-STD-3001 Vol 1 (Rev 2022)"
+  },
+  "environmentModes": {
+    "transit_0g": {
+      "label": "Spacecraft in Transit (0.00g)",
+      "gravityG": 0.0,
+      "commDelayOwltMin": 13.9,
+      "emphasis": "Cephalad fluid shift (SANS), radiation storm shelter readiness, strict closed-loop CO2 monitoring."
+    },
+    "station_leo": {
+      "label": "Orbital Space Station (0.00g LEO)",
+      "gravityG": 0.0,
+      "commDelayOwltMin": 0.1,
+      "emphasis": "Daily ARED resistive exercise logging, EVA readiness, near-real-time flight surgeon link."
+    },
+    "lunar_base": {
+      "label": "Lunar Surface Habitat (0.16g)",
+      "gravityG": 0.16,
+      "commDelayOwltMin": 1.3,
+      "emphasis": "Lunar regolith dust ocular/respiratory irritation, partial-gravity vestibular adaptation, EVA workload."
+    },
+    "mars_surface": {
+      "label": "Mars Base / Rover (0.38g)",
+      "gravityG": 0.38,
+      "commDelayOwltMin": 18.4,
+      "emphasis": "Maximum Earth-independent autonomy, 24h 39m Mars sol circadian alignment, long-duration isolation."
+    }
+  },
+  "referenceRanges": [
+    {
+      "id": "hr",
+      "name": "Resting Heart Rate",
+      "unit": "bpm",
+      "greenRange": "60 - 100 (or +/-10% personal 0g baseline)",
+      "yellowRange": "+12 to +19 bpm above baseline or 7d upward slope",
+      "redRange": ">105 bpm sustained or paired with red-flag symptoms",
+      "source": "AHA / NASA HRP Baroreceptor Adaptation Literature"
+    },
+    {
+      "id": "bp",
+      "name": "Blood Pressure",
+      "unit": "mmHg",
+      "greenRange": "< 120 / 80",
+      "yellowRange": "120-129 / <80 or orthostatic drop",
+      "redRange": ">= 130 / 80 or < 90 / 60 with dizziness",
+      "source": "AHA / NASA-STD-3001"
+    },
+    {
+      "id": "temp",
+      "name": "Core Body Temperature",
+      "unit": "deg C",
+      "greenRange": "36.1 - 37.2 (0g exercise shift up to +0.3 C)",
+      "yellowRange": "37.3 - 37.9 C",
+      "redRange": ">= 38.0 C or < 35.0 C",
+      "source": "NASA HRP Thermoregulation / Stahn et al."
+    },
+    {
+      "id": "glucose",
+      "name": "Fasting Blood Glucose",
+      "unit": "mg/dL",
+      "greenRange": "70 - 99",
+      "yellowRange": "100 - 125 (Spaceflight insulin resistance)",
+      "redRange": ">= 126 or < 70 mg/dL",
+      "source": "ADA / NHANES / NASA Twins Study"
+    },
+    {
+      "id": "spo2",
+      "name": "Oxygen Saturation (SpO2)",
+      "unit": "%",
+      "greenRange": "95 - 100%",
+      "yellowRange": "92 - 94%",
+      "redRange": "< 92%",
+      "source": "WHO / NASA-STD-3001"
+    },
+    {
+      "id": "sleep",
+      "name": "Daily Sleep Duration",
+      "unit": "hours",
+      "greenRange": "7.0 - 9.0 h",
+      "yellowRange": "5.5 - 6.9 h (ISS average ~6.0 h)",
+      "redRange": "< 5.0 h or multi-day cumulative sleep debt",
+      "source": "Barger et al., Lancet Neurology 2014"
+    },
+    {
+      "id": "radiation",
+      "name": "Cumulative Career Radiation",
+      "unit": "mSv",
+      "greenRange": "< 300 mSv (<50% career limit)",
+      "yellowRange": "300 - 480 mSv (50-80% career limit)",
+      "redRange": "> 480 mSv or active Solar Particle Event (>2.0 mSv/d)",
+      "source": "NASA-STD-3001 (2022) 600 mSv Limit"
+    }
+  ]
+}
+
